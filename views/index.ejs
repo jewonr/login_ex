@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="index.css" type="text/css">
     <title>Document</title>
 </head>
 <body>
+    <header class="header">
+        <a href="#" class="logo">LOGO</a>
+        <nav class="navbar">
+            <a href="#">메뉴1</a>
+            <a href="#">메뉴2</a>
+            <a href="#">메뉴3</a>
+            <a href="#">메뉴4</a>
+        </nav>
+        <form action="" class="search-form">
+            <input type="search" id="search-box">
+        </form>
+        <div class="icons">
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+    </header>
     <h1>Hi <%= name %></h1>
     <% contents.forEach(content => { %> 
         <% if(userId === content.creater) { %> 
