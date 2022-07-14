@@ -182,6 +182,15 @@ app.post('/edit', checkAuthenticated, async (req, res) => {
     res.redirect('/home');
 });
 
+app.delete('/delete/:id', checkAuthenticated, async (req, res) => {
+    await Content.findByIdAndDelete(req.params.id);
+})
+
+app.get('/:id', checkAuthenticated, async (req, res) => {
+    const content = await Content.findById(req.params.id);
+    res.render('content.ejs', { content: content });
+})
+
 app.listen(3000, () => {
     console.log("Listening on port 3000");
 });
