@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 const LocalStrategy = require('passport-local').Strategy;
 
 const User = require('./user');
-// const Content = require('./content');
+const Content = require('./content');
 
 // const upload = multer({
 //     storage: multer.diskStorage({
@@ -98,13 +98,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/home', checkAuthenticated, async (req, res) => {
-    // const items = [];
-    // const contents = Content.find({ creater: req.user.id });
-    // (await contents).forEach(content => {
-    //     items.push(content);
-    // });
+    const items = [];
+    const contents = Content.find();
+    (await contents).forEach(content => {
+        items.push(content);
+    });
 
-    res.render('index.ejs', { name: req.user.name });
+    res.render('index.ejs', { 
+        name: req.user.name,
+        userId: req.user.id,
+        contents: items
+    });
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -129,6 +133,7 @@ app.post('/register', async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: hasedPassword,
+            creater: req.user.id
         });
         const newUser = await user.save();
  
@@ -143,6 +148,38 @@ app.post('/register', async (req, res) => {
 app.delete('/logout', (req, res) => {
     req.logOut();
     res.redirect('/');
+});
+
+app.get('/create', checkAuthenticated, (req, res) => {
+    res.render('create.ejs');
+});
+
+app.post('/create', checkAuthenticated, async (req, res) => {
+    const content = new Content({
+        title: req.body.title,
+        text: req.body.text,
+        creater: req.user.id
+    });
+    await content.save();
+
+    res.redirect('/home');
+});
+
+app.get('/edit/:id', checkAuthenticated, async (req, res) => {
+    const content = await Content.findById(req.params.id);
+    console.log(content);
+    res.render('edit.ejs', {
+        content: content
+    });
+});
+
+app.post('/edit', checkAuthenticated, async (req, res) => {
+    await Content.updateOne({ _id: req.body.contentId }, {
+        title: req.body.title,
+        text: req.body.text
+    });
+
+    res.redirect('/home');
 });
 
 app.listen(3000, () => {
