@@ -133,7 +133,6 @@ app.post('/register', async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: hasedPassword,
-            creater: req.user.id
         });
         const newUser = await user.save();
  
