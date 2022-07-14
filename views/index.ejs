@@ -9,11 +9,17 @@
 <body>
     <h1>Hi <%= name %></h1>
     <% contents.forEach(content => { %> 
-        <div id="<%= content._id %>">
-            <a href="/<%= content._id %>"><%= content.title %></a>
-            <button><a href="/edit/<%= content._id %>">수정</a></button>
-            <button class="deleteButton">삭제</button>
-        </div>
+        <% if(userId === content.creater) { %> 
+            <div id="<%= content._id %>">
+                <a href="/<%= content._id %>"><%= content.title %></a>
+                <button><a href="/edit/<%= content._id %>">수정</a></button>
+                <button class="deleteButton">삭제</button>
+            </div>
+        <% } else { %> 
+            <div id="<%= content._id %>">
+                <a href="/<%= content._id %>"><%= content.title %></a>
+            </div>
+        <% } %> 
     <% }) %> 
     <button><a href="/create">글 작성</a></button>
     <form action="/logout?_method=DELETE" method="POST">
