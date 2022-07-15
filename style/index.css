@@ -56,7 +56,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 3000;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -118,5 +118,135 @@ body {
 
 .header .search-form input {
     background-color: transparent;
+    width: 100%;
+}
+
+/* .main-grid-box{
+    margin: 2rem;
+    margin-top: 10rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: 20rem;
+}
+.main-grid-box .grid-block{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-grid-box .grid-block div {
+    font-size: 4rem;
+    font-weight: 500;
+} */
+
+.section_wrapper {
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title_wrapper {
+    width: 30%;
+    height: 60rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title_wrapper #title {
+    font-size: 7rem;
+    font-weight: 500;
+}
+
+.wave {
+    position: absolute;
+    width: 100%;
+    height: 400px;
+    background: url(wave_tropical.png);
+}
+
+#wave1 {
+    animation: animate alternate 11s ease-out infinite;
+    z-index: 1000;
+    opacity: 0.8;
+    animation-delay: 0s;
+    bottom: 1vh;
+    overflow-y: visible;
+}
+
+#wave2 {
+    animation: animate2 alternate 9s ease-out infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 2vh;
+}
+
+#wave3 {
+    animation: animate alternate 7s ease-out infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 3vh;
+}
+
+#wave4 {
+    animation: animate2 alternate 5s ease-out infinite;
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: 0s;
+    bottom: 4vh;
+}
+
+#wave5 {
+    animation: animate-x 30s linear infinite;
+    z-index: 1250;
+    bottom: 0vh;
+}
+
+@keyframes animate {
+    0% {
+        background-position-x: 0;
+        background-position-y: 0;
+    }
+    
+    100% {
+        background-position-x: 1000px;
+        background-position-y: -150px;
+        opacity: 0.1;
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        background-position-x: 0;
+        background-position-y: 0;
+    }
+
+    100% {
+        background-position-x: -1000px;
+        background-position-y: -150px;
+        opacity: 0.1;
+    }
+}
+
+@keyframes animate-x {
+    0% {
+        background-position-x: 0;
+    }
+
+    100% {
+        background-position-x: 100vw;
+    }
+}
+
+.section {
+    height: 100vh;
+    background-color: #13dfed;
     width: 100%;
 }

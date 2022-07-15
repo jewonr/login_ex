@@ -9,40 +9,47 @@
     <title>Document</title>
 </head>
 <body>
-    <header class="header">
-        <a href="#" class="logo">LOGO</a>
-        <nav class="navbar">
-            <a href="#">메뉴1</a>
-            <a href="#">메뉴2</a>
-            <a href="#">메뉴3</a>
-            <a href="#">메뉴4</a>
-        </nav>
-        <form action="" class="search-form">
-            <input type="search" id="search-box">
-        </form>
-        <div class="icons">
-            <div class="fas fa-search" id="search-btn"></div>
-            <div class="fas fa-user" id="login-btn"></div>
+    <%-include('header.ejs') %>
+    <div class="section_wrapper">   
+        <div class="title_wrapper">
+            <div id="dec">내가 버린 쓰레기의 양은</div>
+            <div id="title">000 kg</div>
         </div>
-    </header>
+        <div class="title_wrapper">
+            <div id="dec">내가 쓴 돈은</div>
+            <div id="title">000 ₩</div>
+        </div>
+        <div class="title_wrapper">
+            <div id="dec">넓어진 쓰레기 섬의 면적</div>
+            <div id="title">000 km²</div>
+        </div>
+    </div>
     <h1>Hi <%= name %></h1>
-    <% contents.forEach(content => { %> 
-        <% if(userId === content.creater) { %> 
-            <div id="<%= content._id %>">
-                <a href="/<%= content._id %>"><%= content.title %></a>
-                <button><a href="/edit/<%= content._id %>">수정</a></button>
-                <button class="deleteButton">삭제</button>
-            </div>
-        <% } else { %> 
-            <div id="<%= content._id %>">
-                <a href="/<%= content._id %>"><%= content.title %></a>
-            </div>
-        <% } %> 
-    <% }) %> 
-    <button><a href="/create">글 작성</a></button>
     <form action="/logout?_method=DELETE" method="POST">
         <button type="submit">Log Out</button>
     </form>
+    <div class="wave" id="wave1"></div>
+    <div class="wave" id="wave2"></div>
+    <div class="wave" id="wave3"></div>
+    <div class="wave" id="wave4"></div>
+    <div class="wave" id="wave5"></div>
+    <div class="section">
+        <!-- <% contents.forEach(content => { %> 
+            <% if(userId === content.creater) { %> 
+                <div id="<%= content._id %>">
+                    <a href="/<%= content._id %>"><%= content.title %></a>
+                    <button><a href="/edit/<%= content._id %>">수정</a></button>
+                    <button class="deleteButton">삭제</button>
+                </div>
+            <% } else { %> 
+                <div id="<%= content._id %>">
+                    <a href="/<%= content._id %>"><%= content.title %></a>
+                </div>
+            <% } %> 
+        <% }) %> 
+        <button><a href="/create">글 작성</a></button> -->
+    </div>
+    <div class="section"></div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         let deleteButton = document.querySelectorAll('.deleteButton');
