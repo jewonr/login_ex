@@ -15,6 +15,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(to bottom, rgb(215, 247, 255) 15%, #13dfed 85%);  
 }
 
 body::before {

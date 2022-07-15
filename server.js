@@ -6,8 +6,6 @@ const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-// const multer = require('multer');
-const path = require('path');
 const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
@@ -164,33 +162,6 @@ app.post('/create', checkAuthenticated, async (req, res) => {
 
     res.redirect('/home');
 });
-
-// app.get('/edit/:id', checkAuthenticated, async (req, res) => {
-//     const content = await Content.findById(req.params.id);
-//     console.log(content);
-//     res.render('edit.ejs', {
-//         content: content
-//     });
-// });
-
-app.post('/edit', checkAuthenticated, async (req, res) => {
-    await Content.updateOne({ _id: req.body.contentId }, {
-        title: req.body.title,
-        text: req.body.text
-    });
-
-    res.redirect('/home');
-});
-
-app.delete('/delete/:id', checkAuthenticated, async (req, res) => {
-    await Content.findByIdAndDelete(req.params.id);
-})
-
-app.get('/:id', checkAuthenticated, async (req, res) => {
-    console.log(req.params.id);
-    const content = await Content.findById(req.params.id);
-    res.render('content.ejs', { content: content });
-})
 
 app.listen(3000, () => {
     console.log("Listening on port 3000");

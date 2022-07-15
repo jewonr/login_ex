@@ -48,14 +48,22 @@
             <div><%= Math.round(sumArea)%>cm²</div>
         </div>
     </div>
-    <div class="wave" id="wave1"></div>
-    <div class="wave" id="wave2"></div>
-    <div class="wave" id="wave3"></div>
-    <div class="wave" id="wave4"></div>
-    <div class="wave" id="wave5"></div>
-    <% for(let i = 1; i < sum; i++) { %> 
-        <% Math.floor(Math.random() * 1000) %> 
-    <% } %> 
+    
+    <div class="wave" id="wave1"> </div>
+    <div class="wave" id="wave2"> </div>
+    <div class="wave" id="wave3"> </div>
+    <div class="wave" id="wave4"> </div>
+    <div class="wave" id="wave5">
+        <% for(let i = 1; i < sum; i++) { %> 
+            <% Math.floor(Math.random() * 1000) %>
+            <div class="trash<%= Math.floor(Math.random() * 5) %>"
+                style="left: <%= Math.floor(Math.random() * 90) %>vw;
+                bottom: <%= Math.floor(Math.random() * 12) + 2 %>vh;
+                position: absolute;
+                transform : rotate(<%= Math.floor(Math.random() * 90) %>deg);
+                opacity: <%= (Math.random() * 1) %>;"></div>
+        <% } %> 
+    </div>
     <div class="section" id="section1">
         <h3>플라스틱 사용 내역</h3>
         <div class="grid_wrapper">
@@ -155,10 +163,6 @@
                 );
             }
             location.reload();
-        });
-
-        editButton.forEach(btn => {
-
         });
 
         deleteButton.forEach(btn => {
