@@ -13,12 +13,39 @@
     <div class="section_wrapper">   
         <div class="title_wrapper" id="trashweight">
             <div id="dec">내가 버린 쓰레기의 양</div>
+            <div class="num_area">
+                <% if(Math.floor(sumWeight / 100) <= 0) { %> 
+                    <img src="bottle.png" style="max-width: 50px; max-height: 50px; margin: 0 .5rem;">
+                <% } %> 
+                <% for(let i = 0; i < Math.floor(sumWeight / 100); i++) { %> 
+                    <img src="bottle.png" style="max-width: 50px; max-height: 50px; margin: 0 .5rem;">
+                <% } %> 
+            </div>
+            <div><%= sumWeight %>g</div>
         </div>
         <div class="title_wrapper" id="numanimal">
-            <div id="dec">내가 버린 쓰레기 때문에 위험에 처한 동물</div>
+            <div id="dec">내가 버린 쓰레기로 위험에 처한 동물</div>
+            <div class="num_area">
+                <% if(Math.floor(sum * 0.09) <= 0) { %> 
+                    <img src="fish.png" style="max-width: 50px; max-height: 50px; margin: 0 .5rem;">
+                <% } %> 
+                <% for(let i = 0; i < Math.round(sum * 0.09); i++) { %> 
+                    <img src="fish.png" style="max-width: 50px; max-height: 50px; margin: 0 .5rem;">
+                <% } %> 
+            </div>
+            <div><%= sum %>마리</div>
         </div>
         <div class="title_wrapper" id="trasharea">
-            <div id="dec">넓어진 쓰레기 섬의 면적</div>
+            <div id="dec">생겨난 쓰레기 섬의 면적</div>
+            <div class="num_area">
+                <% if(Math.floor(sumArea / 100) <= 0) { %> 
+                    <img src="ruler.png" style="max-width: 50px; max-height: 50px; margin: 0 .5rem;">
+                <% } %> 
+                <% for(let i = 0; i < Math.floor(sumArea / 100); i++) { %> 
+                    <img src="ruler.png" style="max-width: 50px; max-height: 50px; margin: 0 .5rem;">
+                <% } %> 
+            </div>
+            <div><%= Math.round(sumArea)%>cm²</div>
         </div>
     </div>
     <div class="wave" id="wave1"></div>
@@ -26,8 +53,11 @@
     <div class="wave" id="wave3"></div>
     <div class="wave" id="wave4"></div>
     <div class="wave" id="wave5"></div>
+    <% for(let i = 1; i < sum; i++) { %> 
+        <% Math.floor(Math.random() * 1000) %> 
+    <% } %> 
     <div class="section" id="section1">
-        <h3>플라스틱 내역</h3>
+        <h3>플라스틱 사용 내역</h3>
         <div class="grid_wrapper">
             <% contents.forEach(content => { %>
                 <div class="content_wrapper" id="<%= content._id %>">
@@ -41,7 +71,6 @@
                         <% } %> 
                     <% } %> 
                     <div class="button_in_content">
-                        <a id="editButton" href="#section2">수정</a>
                         <button id="deleteButton">삭제</button>
                     </div>
                 </div>
@@ -128,13 +157,8 @@
             location.reload();
         });
 
-        // console.log(deleteButton);
-
         editButton.forEach(btn => {
-            let id = btn.parentElement.parentElement.id;
-            btn.addEventListener('click', async () => {
-                await axios.get('/get/')
-            });
+
         });
 
         deleteButton.forEach(btn => {
@@ -152,17 +176,3 @@
     </script>
 </body>
 </html>
-
-<!-- <% contents.forEach(content => { %> 
-    <% if(userId === content.creater) { %> 
-        <div id="<%= content._id %>">
-            <a href="/<%= content._id %>"><%= content.title %></a>
-            <button><a href="/edit/<%= content._id %>">수정</a></button>
-            <button class="deleteButton">삭제</button>
-        </div>
-    <% } else { %> 
-        <div id="<%= content._id %>">
-            <a href="/<%= content._id %>"><%= content.title %></a>
-        </div>
-    <% } %> 
-<% }) %>  -->

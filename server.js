@@ -90,10 +90,12 @@ app.get('/home', checkAuthenticated, async (req, res) => {
     let areaOfProducts = [1.26, 0.72, 0.8, 9.0, 1.24, 4.32]
     let sumWeight = 0;
     let sumArea = 0;
+    let sum = 0;
     (await contents).forEach(content => {
         for(let i = 0; i < weightOfProducts.length; i++) {
             sumWeight += content.numberOfProduct[i] * weightOfProducts[i];
             sumArea += content.numberOfProduct[i] * areaOfProducts[i];
+            sum += content.numberOfProduct[i];
         }
         items.push(content);
     });
@@ -106,7 +108,8 @@ app.get('/home', checkAuthenticated, async (req, res) => {
         userId: req.user.id,
         contents: items,
         sumWeight: sumWeight,
-        sumArea: sumArea
+        sumArea: sumArea,
+        sum: sum
     });
 });
 

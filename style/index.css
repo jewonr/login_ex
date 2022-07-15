@@ -65,8 +65,8 @@ body {
 }
 
 .header .logo {
-    font-size: 2.5rem;
-    font-weight: bolder;
+    font-size: 3rem;
+    font-weight: 900;
     color: var(--black);
 }
 
@@ -80,26 +80,6 @@ body {
 .header .navbar a:hover {
     color: var(--orange);
 }
-
-/* .main-grid-box{
-    margin: 2rem;
-    margin-top: 10rem;
-    position: relative;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-auto-rows: 20rem;
-}
-.main-grid-box .grid-block{
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-grid-box .grid-block div {
-    font-size: 4rem;
-    font-weight: 500;
-} */
 
 .section_wrapper {
     width: 100%;
@@ -121,6 +101,21 @@ body {
 .title_wrapper #title {
     font-size: 7rem;
     font-weight: 500;
+}
+
+.num_area {
+    height: 15rem;
+    width: 100%;
+    padding: 0 2rem;
+    display: grid;
+    justify-content: center;
+    margin: 1.5rem 0;
+    grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+    overflow-y: scroll;
+}
+
+#dec {
+    font-weight: 200;
 }
 
 .wave {
@@ -205,6 +200,8 @@ body {
     }
 }
 
+
+
 .section {
     padding: 3rem;
     height: 800px;
@@ -254,8 +251,8 @@ h3 {
 
 }
 
-.button_in_content button, .button_in_content a {
-    width: 45%;
+.button_in_content button {
+    width: 100%;
     position: relative;
     display: inline-block;
     text-decoration: none;
@@ -272,7 +269,7 @@ h3 {
     line-height: 40px;
 }
 
-.button_in_content button:hover, .button_in_content a:hover {
+.button_in_content button:hover {
     background-color: var(--orange);
     color: white;
 }
@@ -320,7 +317,6 @@ h3 {
 .icon_area {
     width: 100%;
     height: 200px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 30px;
     border-radius: 10px;
     margin: 0.8rem;
@@ -331,4 +327,3 @@ h3 {
     justify-content: center;
     align-items: center;
 }
-

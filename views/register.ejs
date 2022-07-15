@@ -1,4 +1,4 @@
-<h1>Register</h1>
+<!-- <h1>Register</h1>
 <form action="/register" method="POST">
     <div>
         <label for="name">Name</label>
@@ -14,4 +14,36 @@
     </div>
     <button type="submit">Register</button>
 </form>
-<a href="/login">Login</a>
+<a href="/login">Login</a> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="form.css" type="text/css">
+    <title>My Island</title>
+</head>
+<body>
+    <div class="form">
+        <h1>회원가입</h1>
+        <form action="/register" method="POST">
+            <div class="input_wrapper">
+                <input type="text" id="name" name="name" required autocomplete="off">
+                <label for="name">Name</label>
+            </div>
+            <div class="input_wrapper">
+                <input type="email" id="email" name="email" required autocomplete="off">
+                <label for="email">Email</label>
+            </div>
+            <div class="input_wrapper">
+                <input type="password" id="password" name="password" required autocomplete="off">
+                <label for="password">Password</label>
+            </div>
+            <button type="submit">register</button>
+        </form>
+    </div>
+    <a href="/login">로그인</a>
+</body>
+</html>

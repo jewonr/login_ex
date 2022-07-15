@@ -1,4 +1,4 @@
-<h1>Login</h1>
+<!-- <h1>Login</h1>
 <% if (messages.error) { %>
     <%= messages.error %>
 <% } %>
@@ -13,4 +13,37 @@
     </div>
     <button type="submit">Login</button>
 </form>
-<a href="/register">Register</a>
+<a href="/register">Register</a> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="form.css" type="text/css">
+    <title>My Island</title>
+</head>
+<body>
+    <div class="form">
+        <h1>로그인</h1>
+        <form action="/login" method="POST">
+            <div class="input_wrapper">
+                <input type="email" id="email" name="email" required autocomplete="off">
+                <label for="email">email</label>
+            </div>
+            <div class="input_wrapper">
+                <input type="password" id="password" name="password" required autocomplete="off">
+                <label for="password">password</label>
+            </div>
+            <div class="error_message">
+                <% if (messages.error) { %>
+                    <%= messages.error %>
+                <% } %>
+            </div>
+            <button type="submit">LOGIN</button>
+        </form>
+    </div>
+    <a href="/register">회원가입</a>
+</body>
+</html>
