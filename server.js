@@ -17,20 +17,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./user');
 const Content = require('./content');
 
-// const upload = multer({
-//     storage: multer.diskStorage({
-//         destination(req, file, done) {
-//             done(null, 'style/uploads/');
-//         },
-//         filename(req, file, cb) {
-//             const ext = path.extname(file.originalname);	
-//             const timestamp = new Date().getTime().valueOf();	
-//             const filename = path.basename(file.originalname, ext) + timestamp + ext;
-//             cb(null, filename);
-//         }
-//     }),
-// })
-
 const checkAuthenticated = (req, res, next) => {
     if(req.isAuthenticated()) {
         return next();
@@ -99,15 +85,28 @@ app.get('/', (req, res) => {
 
 app.get('/home', checkAuthenticated, async (req, res) => {
     const items = [];
-    const contents = Content.find();
+    const contents = Content.find({ creater: req.user.id });
+    let weightOfProducts = [16, 10, 6, 3, 1, 7];
+    let areaOfProducts = [1.26, 0.72, 0.8, 9.0, 1.24, 4.32]
+    let sumWeight = 0;
+    let sumArea = 0;
     (await contents).forEach(content => {
+        for(let i = 0; i < weightOfProducts.length; i++) {
+            sumWeight += content.numberOfProduct[i] * weightOfProducts[i];
+            sumArea += content.numberOfProduct[i] * areaOfProducts[i];
+        }
         items.push(content);
     });
+
+    console.log(sumWeight);
+    console.log(sumArea);
 
     res.render('index.ejs', { 
         name: req.user.name,
         userId: req.user.id,
-        contents: items
+        contents: items,
+        sumWeight: sumWeight,
+        sumArea: sumArea
     });
 });
 
@@ -149,28 +148,27 @@ app.delete('/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.get('/create', checkAuthenticated, (req, res) => {
-    res.render('create.ejs');
-});
-
 app.post('/create', checkAuthenticated, async (req, res) => {
+    console.log(req.body.numberOfAddedProduct);
     const content = new Content({
-        title: req.body.title,
-        text: req.body.text,
+        numberOfProduct: req.body.numberOfAddedProduct,
+        productName: req.body.productName,
         creater: req.user.id
     });
     await content.save();
 
+    console.log(content);
+
     res.redirect('/home');
 });
 
-app.get('/edit/:id', checkAuthenticated, async (req, res) => {
-    const content = await Content.findById(req.params.id);
-    console.log(content);
-    res.render('edit.ejs', {
-        content: content
-    });
-});
+// app.get('/edit/:id', checkAuthenticated, async (req, res) => {
+//     const content = await Content.findById(req.params.id);
+//     console.log(content);
+//     res.render('edit.ejs', {
+//         content: content
+//     });
+// });
 
 app.post('/edit', checkAuthenticated, async (req, res) => {
     await Content.updateOne({ _id: req.body.contentId }, {
@@ -186,6 +184,7 @@ app.delete('/delete/:id', checkAuthenticated, async (req, res) => {
 })
 
 app.get('/:id', checkAuthenticated, async (req, res) => {
+    console.log(req.params.id);
     const content = await Content.findById(req.params.id);
     res.render('content.ejs', { content: content });
 })

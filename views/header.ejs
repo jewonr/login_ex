@@ -1,11 +1,13 @@
 <header class="header">
     <a href="#" class="logo">TRASH ISLAND</a>
     <nav class="navbar">
-        <a href="#">나의 플라스틱섬</a>
-        <a href="#section1">플라스틱 일기</a>
-        <a href="#section2">버린 쓰레기 작성</a>
+        <a href="#">나의 플라스틱 섬</a>
+        <a href="#section1">플라스틱 내역</a>
+        <a href="#section2">내가 버린 플라스틱 입력</a>
     </nav>
     <div class="icons">
-        <div class="fas fa-user" id="login-btn"></div>
+        <form action="/logout?_method=DELETE" method="POST">
+            <button type="submit" class="btn">로그아웃</button>
+        </form>
     </div>
 </header>

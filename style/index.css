@@ -32,7 +32,7 @@ html {
 }
 
 body {
-    background: #eee;
+    background: rgb(215, 247, 255);
 }
 
 .btn {
@@ -41,14 +41,13 @@ body {
     padding: .8rem 3rem;
     font-size: 1.7rem;
     border-radius: .5rem;
-    border: .2rem solid var(--black);
-    color: var(--black);
+    color: black;
     cursor: pointer;
+    background: none;
 }
 
 .btn:hover {
-    background: var(--orange);
-    color: #fff;
+    color: var(--orange);
 }
 
 .header {
@@ -75,50 +74,11 @@ body {
     font-size: 1.7rem;
     margin: 0 2.5rem;
     color: var(--black);
+    font-weight: 100;
 }
 
 .header .navbar a:hover {
     color: var(--orange);
-}
-
-.header .icons div {
-    height: 4.5rem;
-    width: 4.5rem;
-    line-height: 4.5rem;
-    border-radius: .5rem;
-    background: #eee;
-    color: var(--black);
-    font-size: 2rem;
-    margin-right: .3rem;
-    text-align: center;
-}
-
-.header .icons div:hover {
-    background: var(--orange);
-    color: #fff;
-}
-
-#menu-btn {
-    display: none;
-}
-
-.header .search-form {
-    position: absolute;
-    right: 25rem;
-    width: 20rem;
-    height: 4.5rem;
-    border-radius: .5rem;
-    background: #fff;
-    overflow: hidden;
-    align-items: center;
-    padding: 10px;
-    background-color: rgba(0,0,0,.05);
-    display: flex;
-}
-
-.header .search-form input {
-    background-color: transparent;
-    width: 100%;
 }
 
 /* .main-grid-box{
@@ -247,18 +207,29 @@ body {
 
 .section {
     padding: 3rem;
-    height: 1000px;
+    height: 800px;
     background-color: #13dfed;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30%, auto));
-    grid-template-rows: repeat(auto-fill, minmax(20%, auto));
-    gap: 30px;
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #section1 { 
-    margin-top: 10rem;
+    margin-top: 13rem;
+}
+
+.grid_wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+    gap: 30px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+h3 {
+    margin-bottom: 4rem;
 }
 
 .content_wrapper {
@@ -266,6 +237,9 @@ body {
     padding: 30px;
     border-radius: 30px;
     box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .content_wrapper .content {
@@ -273,27 +247,59 @@ body {
     justify-content: space-between;
 }
 
+.button_in_content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+
+}
+
+.button_in_content button, .button_in_content a {
+    width: 45%;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 10px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: 0.5s;
+    color: rgba(0, 0, 0, 0.7);
+    border: none;
+    font-size: 1.4rem;
+    bottom: 10;
+    text-align: center;
+    line-height: 40px;
+}
+
+.button_in_content button:hover, .button_in_content a:hover {
+    background-color: var(--orange);
+    color: white;
+}
+
 #section2 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-#section2 .button_wrapper {
-    display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 }
 
+#section2 .button_wrapper {
+    justify-content: space-between;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16%, auto));
+    width: 100%;
+}
+
 .plastic {
-    margin: 0 0.8rem;
+    margin: 0.8rem 0.8rem;
     position: relative;
     display: inline-block;
     padding: 12px 12px;
     text-decoration: none;
     font-size: 18px;
     border-radius: 10px;
-    width: 20rem;
     height: 50px;
     background-color: rgba(255, 255, 255, 0.3);
     transition: 0.5s;
@@ -302,13 +308,13 @@ body {
     /* box-shadow: var(--box-shadow); */
 }
 
-/* .plastic.ctrl {
+.plastic.ctrl {
     width: 80px;
-    background-color: transparent;
-} */
+}
 
 .plastic:hover {
-    background-color: #fff;
+    background-color: var(--orange);
+    color: white;
 }
 
 .icon_area {
@@ -317,6 +323,7 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.3);
     padding: 30px;
     border-radius: 10px;
+    margin: 0.8rem;
 }
 
 .submit_button {

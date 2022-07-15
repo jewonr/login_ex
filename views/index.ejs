@@ -11,64 +11,59 @@
 <body>
     <%-include('header.ejs') %>
     <div class="section_wrapper">   
-        <div class="title_wrapper">
-            <div id="dec">내가 버린 쓰레기의 양은</div>
-            <div id="title">000 kg</div>
+        <div class="title_wrapper" id="trashweight">
+            <div id="dec">내가 버린 쓰레기의 양</div>
         </div>
-        <div class="title_wrapper">
-            <div id="dec">내가 쓴 돈은</div>
-            <div id="title">000 ₩</div>
+        <div class="title_wrapper" id="numanimal">
+            <div id="dec">내가 버린 쓰레기 때문에 위험에 처한 동물</div>
         </div>
-        <div class="title_wrapper">
-            <div id="dec">넓어진 쓰레기 섬의 면적은</div>
-            <div id="title">000 km²</div>
+        <div class="title_wrapper" id="trasharea">
+            <div id="dec">넓어진 쓰레기 섬의 면적</div>
         </div>
     </div>
-    <h1>Hi <%= name %></h1>
-    <form action="/logout?_method=DELETE" method="POST">
-        <button type="submit">Log Out</button>
-    </form>
     <div class="wave" id="wave1"></div>
     <div class="wave" id="wave2"></div>
     <div class="wave" id="wave3"></div>
     <div class="wave" id="wave4"></div>
     <div class="wave" id="wave5"></div>
     <div class="section" id="section1">
-        <div class="content_wrapper">
-            <h4>6/11</h4>
-            <div class="content">
-                <p>물품 이름</p>
-                <p>1000₩</p>
-            </div>
-            <div class="content">
-                <p></p>
-                <p></p>
-            </div>
-            <div class="content">
-                <p></p>
-                <p></p>
-            </div>
+        <h3>플라스틱 내역</h3>
+        <div class="grid_wrapper">
+            <% contents.forEach(content => { %>
+                <div class="content_wrapper" id="<%= content._id %>">
+                    <h4><%= (content.createAt).toLocaleDateString() %></h4>
+                    <% for(let i = 0; i < content.numberOfProduct.length; i++) { %>
+                        <% if(content.numberOfProduct[i] != 0) { %> 
+                            <div class="content">
+                                <p><%= content.productName[i] %> </p>
+                                <p><%= content.numberOfProduct[i] %></p>
+                            </div>
+                        <% } %> 
+                    <% } %> 
+                    <div class="button_in_content">
+                        <a id="editButton" href="#section2">수정</a>
+                        <button id="deleteButton">삭제</button>
+                    </div>
+                </div>
+            <% }) %> 
         </div>
-        <div class="content_wrapper"></div>
-        <div class="content_wrapper"></div>
-        <div class="content_wrapper"></div>
     </div>
     <div class="section" id="section2">
+        <h3>내가 버린 플라스틱 입력</h3>
         <div class="button_wrapper">
-            <div class="option_button">
-                <button class="plastic" id="can">캔</button>
-                <button class="plastic" id="bottle">페트병</button>
-                <button class="plastic" id="bag">비닐봉지</button>
-                <button class="plastic" id="cup">페트컵</button>
-                <button class="plastic" id="snack">과자봉지</button>
-            </div>
+            <button class="plastic" id="can">캔</button>
+            <button class="plastic" id="bottle">페트병</button>
+            <button class="plastic" id="bag">비닐봉지</button>
+            <button class="plastic" id="cup">페트컵</button>
+            <button class="plastic" id="snack">과자봉지</button>
+            <button class="plastic" id="container">플라스틱 용기</button>
         </div>
         <div class="icon_area">
 
         </div>
         <div class="submit_button">
-            <button class="plastic ctrl">초기화</button>
-            <button type="submit" class="plastic ctrl">추가</button>
+            <button class="plastic ctrl" id="reset">초기화</button>
+            <button type="submit" class="plastic ctrl" id="add">추가</button>
         </div>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -79,50 +74,71 @@
         let bag = document.getElementById('bag');
         let cup = document.getElementById('cup');
         let snack = document.getElementById('snack');
+        let container = document.getElementById('container');
+        let resetButton = document.getElementById('reset');
+        let addButton = document.getElementById('add');
 
-        can.addEventListener('click', () => {
-            let canImg = document.createElement('img');
-            canImg.setAttribute('src', 'open-can.png');
-            canImg.style.width = '50px';
-            canImg.style.height = '50px';
-            iconArea.appendChild(canImg);
+        let numberOfAddedProduct = [0,0,0,0,0,0];
+        let productImgName = ['open-can.png', 'water.png', 'bag.png', 'drink.png', 'snack.png', 'container.png'];
+        let productName = ['캔', '페트병', '비닐 봉지', '페트컵', '과자 봉지', '플라스틱 용기']
+        let productNode = [can, bottle, bag, cup, snack, container];
+
+        let editButton = document.querySelectorAll('#editButton');
+        let deleteButton = document.querySelectorAll('#deleteButton');
+
+        let trashweight = document.querySelector('#trashweight');
+        let numanimal = document.querySelector('#numanimal');
+        let trasharea = document.querySelector('#trasharea');
+
+        for(let i = 0; i < productName.length; i++) {
+            productNode[i].addEventListener('click', () => {
+                numberOfAddedProduct[i]++;
+                let img = document.createElement('img');
+                img.setAttribute('src', productImgName[i]);
+                img.style.width = '50px';
+                img.style.height = '50px';
+                img.style.margin = '0 1rem'
+                iconArea.appendChild(img);
+                console.log(numberOfAddedProduct);
+            });
+
+            resetButton.addEventListener('click', () => {
+                numberOfAddedProduct = [0,0,0,0,0,0];
+                while(iconArea.hasChildNodes()) {
+                    iconArea.removeChild(
+                        iconArea.firstChild
+                    );
+                }
+            });
+        }
+
+        addButton.addEventListener('click', async () => {
+            await axios.post('/create', {
+                numberOfAddedProduct: numberOfAddedProduct,
+                productName: productName,
+                headers: {
+                    'Content-Type': "application/json",
+                }
+            });
+            while(iconArea.hasChildNodes()) {
+                iconArea.removeChild(
+                    iconArea.firstChild
+                );
+            }
+            location.reload();
         });
 
-        bottle.addEventListener('click', () => {
-            let bottleImg = document.createElement('img');
-            bottleImg.setAttribute('src', 'water.png');
-            bottleImg.style.width = '50px';
-            bottleImg.style.height = '50px';
-            iconArea.appendChild(bottleImg);
+        // console.log(deleteButton);
+
+        editButton.forEach(btn => {
+            let id = btn.parentElement.parentElement.id;
+            btn.addEventListener('click', async () => {
+                await axios.get('/get/')
+            });
         });
 
-        bag.addEventListener('click', () => {
-            let bagImg = document.createElement('img');
-            bagImg.setAttribute('src', 'bag.png');
-            bagImg.style.width = '50px';
-            bagImg.style.height = '50px';
-            iconArea.appendChild(bagImg);
-        });
-
-        cup.addEventListener('click', () => {
-            let cupImg = document.createElement('img');
-            cupImg.setAttribute('src', 'drink.png');
-            cupImg.style.width = '50px';
-            cupImg.style.height = '50px';
-            iconArea.appendChild(cupImg);
-        });
-
-        snack.addEventListener('click', () => {
-            let snackImg = document.createElement('img');
-            snackImg.setAttribute('src', 'snack.png');
-            snackImg.style.width = '50px';
-            snackImg.style.height = '50px';
-            iconArea.appendChild(snackImg);
-        });
-
-        let deleteButton = document.querySelectorAll('.deleteButton');
         deleteButton.forEach(btn => {
-            let id = btn.parentElement.id;
+            let id = btn.parentElement.parentElement.id;
             btn.addEventListener('click', async () => {
                 window.location.href=window.location.href
                 await axios.delete(`/delete/${id}`, {
@@ -130,14 +146,14 @@
                         'Content-Type': "application/json",
                     }
                 });
+                location.reload();
             });
         });
     </script>
 </body>
 </html>
 
-
-<% contents.forEach(content => { %> 
+<!-- <% contents.forEach(content => { %> 
     <% if(userId === content.creater) { %> 
         <div id="<%= content._id %>">
             <a href="/<%= content._id %>"><%= content.title %></a>
@@ -149,5 +165,4 @@
             <a href="/<%= content._id %>"><%= content.title %></a>
         </div>
     <% } %> 
-<% }) %> 
-<button><a href="/create">글 작성</a></button>
+<% }) %>  -->

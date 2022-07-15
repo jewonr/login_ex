@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
 
 const ContentSchema = new mongoose.Schema({
-    title: {
-        type: String
-    },
-
-    text: {
-        type: String
-    },
-
     createAt: {
         type: Date,
         default: Date.now
+    },
+
+    numberOfProduct: {
+        type: Array,
+        required: true
+    },
+
+    productName: {
+        type: Array,
+        required: true
     },
 
     creater: {
